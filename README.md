@@ -1,8 +1,11 @@
 <p align="center">
     <img src="assets/icon.png" margin="auto" height="175"/>
 </p>
-
 <p align="center">
+    <a href="https://github.com/bmresearch/Solnet.Pyth/actions/workflows/build.yml">
+       <img alt="Build" src="https://github.com/bmresearch/Solnet.Pyth/actions/workflows/build.yml/badge.svg"></a>
+    <a href="https://github.com/bmresearch/Solnet.Pyth/actions/workflows/publish.yml">
+       <img alt="Release" src="https://github.com/bmresearch/Solnet.Pyth/actions/workflows/publish.yml/badge.svg"></a>
     <a href="">
         <img src="https://img.shields.io/github/license/bmresearch/solnet.pyth?style=flat-square"
             alt="Code License"></a>
