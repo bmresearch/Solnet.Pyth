@@ -46,6 +46,6 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.ACCESS_TOKEN }}
-          file: Solnet.Serum/bin/Release/net5.0/ref/Solnet.Serum.dll
+          file: Solnet.Pyth/bin/Release/net5.0/ref/Solnet.Pyth.dll
           tag: ${{ steps.publish_nuget.outputs.VERSION }}
           upload_url: ${{ steps.create_release.outputs.upload_url }}
