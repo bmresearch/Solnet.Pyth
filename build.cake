@@ -78,7 +78,7 @@ Task("Report")
 
 
 Task("Publish")
-    .IsDependentOn("Report")
+    .IsDependentOn("Build")
     .Does(() => {
         DotNetCorePublish(solutionFolder, new DotNetCorePublishSettings
         {
