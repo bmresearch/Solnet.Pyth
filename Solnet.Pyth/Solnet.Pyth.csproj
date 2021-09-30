@@ -1,7 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <Description>
+            Solnet.Pyth implements functionality to integrate Pyth Network into .Net applications.
+        </Description>
         <TargetFramework>net5.0</TargetFramework>
+        <IsPackable>true</IsPackable>
     </PropertyGroup>
 
     <ItemGroup>
@@ -10,4 +14,5 @@
       <PackageReference Include="Solnet.Programs" Version="0.4.8" />
     </ItemGroup>
 
+    <Import Project="..\SharedBuildProperties.props" />
 </Project>
