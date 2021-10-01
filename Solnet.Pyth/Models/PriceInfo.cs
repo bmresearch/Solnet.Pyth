@@ -72,7 +72,7 @@ namespace Solnet.Pyth.Models
         /// <summary>
         /// The aggregate corporate action.
         /// </summary>
-        public uint CorporateAction;
+        public CorporateAction CorporateAction;
         
         /// <summary>
         /// The aggregate publish slot.
@@ -99,7 +99,7 @@ namespace Solnet.Pyth.Models
                 ConfidenceComponent = confidenceComponent,
                 Confidence = confidenceComponent * multiplier,
                 Status = (PriceStatus) Enum.Parse(typeof(PriceStatus), data.GetU32(Layout.StatusOffset).ToString()),
-                CorporateAction = data.GetU32(Layout.CorporateActionOffset),
+                CorporateAction = (CorporateAction) Enum.Parse(typeof(CorporateAction), data.GetU32(Layout.CorporateActionOffset).ToString()),
                 PublishSlot = data.GetU64(Layout.PublishSlotOffset)
             };
         }
