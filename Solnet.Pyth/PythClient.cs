@@ -42,6 +42,7 @@ namespace Solnet.Pyth
 
         #region Streaming JSON RPC
 
+        /// <inheritdoc cref="SubscribePriceDataAccountAsync(Action{Subscription, PriceDataAccount, ulong}, string, Commitment)"/>
         public async Task<Subscription> SubscribePriceDataAccountAsync(
             Action<Subscription, PriceDataAccount, ulong> action, string priceAccountAddress,
             Commitment commitment = Commitment.Finalized)
@@ -65,21 +66,23 @@ namespace Solnet.Pyth
             return subOpenOrders;
         }
 
+        /// <inheritdoc cref="SubscribePriceDataAccount(Action{Subscription, PriceDataAccount, ulong}, string, Commitment)"/>
         public Subscription SubscribePriceDataAccount(Action<Subscription, PriceDataAccount, ulong> action,
             string priceAccountAddress, Commitment commitment = Commitment.Finalized) =>
             SubscribePriceDataAccountAsync(action, priceAccountAddress, commitment).Result;
 
+        /// <inheritdoc cref="UnsubscribePriceDataAccountAsync(string)"/>
         public Task UnsubscribePriceDataAccountAsync(string priceAccountAddress)
         {
             SubscriptionWrapper<PriceDataAccount> subscriptionWrapper = null;
 
             foreach (SubscriptionWrapper<PriceDataAccount> sub in _priceDataAccountSubscriptions)
             {
-                if (sub.Address.Key != priceAccountAddress)
-                    continue;
+                if (sub.Address.Key != priceAccountAddress) continue;
 
                 subscriptionWrapper = sub;
                 _priceDataAccountSubscriptions.Remove(sub);
+                break;
             }
 
             return subscriptionWrapper == null
@@ -87,6 +90,7 @@ namespace Solnet.Pyth
                 : StreamingRpcClient.UnsubscribeAsync(subscriptionWrapper.SubscriptionState);
         }
 
+        /// <inheritdoc cref="UnsubscribePriceDataAccount(string)"/>
         public void UnsubscribePriceDataAccount(string priceAccountAddress) =>
             UnsubscribePriceDataAccountAsync(priceAccountAddress).Wait();
 

@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 using Solnet.Rpc;
 
 namespace Solnet.Pyth
