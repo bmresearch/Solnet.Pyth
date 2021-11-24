@@ -1,3 +1,4 @@
+using Solnet.Programs.Models;
 using Solnet.Pyth.Models;
 using Solnet.Rpc;
 using System;

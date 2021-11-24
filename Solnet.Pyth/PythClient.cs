@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
+using Solnet.Programs.Abstract;
+using Solnet.Programs.Models;
 using Solnet.Pyth.Models;
 using Solnet.Rpc;
 using Solnet.Rpc.Core.Sockets;

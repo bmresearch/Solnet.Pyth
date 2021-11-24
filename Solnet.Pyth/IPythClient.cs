@@ -1,3 +1,4 @@
+using Solnet.Programs.Models;
 using Solnet.Pyth.Models;
 using Solnet.Rpc.Core.Sockets;
 using Solnet.Rpc.Types;
