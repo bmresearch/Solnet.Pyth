@@ -1,6 +1,6 @@
+using Solnet.Programs.Models;
 using Solnet.Pyth.Models;
 using Solnet.Rpc;
-using Solnet.Wallet;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

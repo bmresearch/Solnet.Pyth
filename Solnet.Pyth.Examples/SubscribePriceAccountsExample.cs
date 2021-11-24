@@ -1,11 +1,10 @@
+using Solnet.Programs.Models;
 using Solnet.Pyth.Models;
 using Solnet.Rpc;
 using Solnet.Rpc.Types;
-using Solnet.Wallet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Solnet.Pyth.Examples
 {
