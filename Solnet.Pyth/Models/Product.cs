@@ -6,6 +6,12 @@ namespace Solnet.Pyth.Models
     public class Product
     {
         /// <summary>
+        /// The base of the product.
+        /// <remarks>Example: SOL</remarks>
+        /// </summary>
+        public string Base;
+
+        /// <summary>
         /// The symbol of the product.
         /// <remarks>Example: SOL/USD</remarks>
         /// </summary>

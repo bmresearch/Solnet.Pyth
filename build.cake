@@ -32,6 +32,7 @@ Task("Restore")
     });
 
 Task("Build")
+    .IsDependentOn("Clean")
     .IsDependentOn("Restore")
     .Does(() => {
         DotNetCoreBuild(solutionFolder, new DotNetCoreBuildSettings
@@ -78,7 +79,7 @@ Task("Report")
 
 
 Task("Publish")
-    .IsDependentOn("Build")
+    .IsDependentOn("Report")
     .Does(() => {
         DotNetCorePublish(solutionFolder, new DotNetCorePublishSettings
         {
@@ -99,10 +100,13 @@ Task("Pack")
             NoBuild = true,
             NoRestore = true,
             IncludeSymbols = true,
-            OutputDirectory = packagesDir
+            OutputDirectory = packagesDir,
         };
 
-        DotNetCorePack("./Solnet.Pyth/", settings);
+
+        GetFiles("./Solnet.Pyth/")
+            .ToList()
+            .ForEach(f => DotNetCorePack(f.FullPath, settings));
     });
 
 RunTarget(target);

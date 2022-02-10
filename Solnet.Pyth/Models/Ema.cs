@@ -62,8 +62,6 @@ namespace Solnet.Pyth.Models
         /// <returns>The <see cref="Ema"/>.</returns>
         public static Ema Deserialize(ReadOnlySpan<byte> data, double multiplier)
         {
-            if (data.Length != Layout.Length) throw new Exception("data length is invalid");
-
             long valueComponent = data.GetS64(Layout.ValueComponentOffset);
 
             return new Ema

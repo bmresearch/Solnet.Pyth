@@ -6,6 +6,10 @@
        <img alt="Build" src="https://github.com/bmresearch/Solnet.Pyth/actions/workflows/build.yml/badge.svg"></a>
     <a href="https://github.com/bmresearch/Solnet.Pyth/actions/workflows/publish.yml">
        <img alt="Release" src="https://github.com/bmresearch/Solnet.Pyth/actions/workflows/publish.yml/badge.svg"></a>
+    <a href="https://coveralls.io/github/bmresearch/Solnet.Pyth?branch=main">
+        <img src="https://coveralls.io/repos/github/bmresearch/Solnet.Pyth/badge.svg?branch=main" 
+            alt="Coverage Status" ></a>
+<br/>
     <a href="">
         <img src="https://img.shields.io/github/license/bmresearch/solnet.pyth?style=flat-square"
             alt="Code License"></a>
@@ -35,9 +39,9 @@ separate repository so it is contained, as the goal for [Solnet](https://github.
 - net 5.0
 
 ## Dependencies
-- Solnet.Wallet v0.4.14
-- Solnet.Rpc v0.4.14
-- Solnet.Programs v0.4.14
+- Solnet.Wallet v0.6.0
+- Solnet.Rpc v0.6.0
+- Solnet.Programs v0.6.0
 
 ## API
 
@@ -45,36 +49,36 @@ The `IPythClient` API follows the following structure:
 
 ### JSON RPC
 
-#### `GetMappingAccountAsync(string account, Commitment commitment = Commitment.Finalized);`
+###### `GetMappingAccountAsync(string account, Commitment commitment = Commitment.Finalized);`
   - Gets the given `MappingAccount`. This is an asynchronous operation.
-#### `GetMappingAccount(string account, Commitment commitment = Commitment.Finalized);`
+###### `GetMappingAccount(string account, Commitment commitment = Commitment.Finalized);`
   - Gets the given `MappingAccount`.
-#### `GetProductAccountAsync(string account, Commitment commitment = Commitment.Finalized);`
+###### `GetProductAccountAsync(string account, Commitment commitment = Commitment.Finalized);`
   - Gets the given `ProductAccount`. This is an asynchronous operation.
-#### `GetProductAccount(string account, Commitment commitment = Commitment.Finalized);`
+###### `GetProductAccount(string account, Commitment commitment = Commitment.Finalized);`
   - Gets the given `ProductAccount`.
-#### `GetProductAccountsAsync(MappingAccount mappingAccount, Commitment commitment = Commitment.Finalized);`
+###### `GetProductAccountsAsync(MappingAccount mappingAccount, Commitment commitment = Commitment.Finalized);`
   - Gets a list of `ProductAccount`s from the given `MappingAccount`. This is an asynchronous operation.
-#### `GetProductAccounts(MappingAccount mappingAccount, Commitment commitment = Commitment.Finalized);`
+###### `GetProductAccounts(MappingAccount mappingAccount, Commitment commitment = Commitment.Finalized);`
   - Gets a list of `ProductAccount`s from the given `MappingAccount`.
-#### `GetPriceDataAccountAsync(string account, Commitment commitment = Commitment.Finalized);`
+###### `GetPriceDataAccountAsync(string account, Commitment commitment = Commitment.Finalized);`
   - Gets the given `PriceDataAccount`. This is an asynchronous operation.
-#### `GetPriceDataAccount(string account, Commitment commitment = Commitment.Finalized);`
+###### `GetPriceDataAccount(string account, Commitment commitment = Commitment.Finalized);`
   - Gets the given `PriceDataAccount`.
-#### `GetPriceDataAccountsAsync(List<ProductAccount> productAccounts, Commitment commitment = Commitment.Finalized);`
+###### `GetPriceDataAccountsAsync(List<ProductAccount> productAccounts, Commitment commitment = Commitment.Finalized);`
   - Gets a list of `PriceDataAccount`s from the given list of `ProductAccount`. This is an asynchronous operation.
-#### `GetPriceDataAccounts(List<ProductAccount> productAccounts, Commitment commitment = Commitment.Finalized);`
+###### `GetPriceDataAccounts(List<ProductAccount> productAccounts, Commitment commitment = Commitment.Finalized);`
   - Gets a list of `PriceDataAccount`s from the given list `ProductAccount`.
   
 ### Streaming JSON RPC
 
-#### `SubscribePriceDataAccountAsync(Action<Subscription, PriceDataAccount, ulong> action, string priceAccountAddress, Commitment commitment = Commitment.Finalized);`
+###### `SubscribePriceDataAccountAsync(Action<Subscription, PriceDataAccount, ulong> action, string priceAccountAddress, Commitment commitment = Commitment.Finalized);`
   - Subscribe to a live feed of a `PriceDataAccount`, the given action is called on every notification received. This is an asynchronous operation.
-#### `SubscribePriceDataAccount(Action<Subscription, PriceDataAccount, ulong> action, string priceAccountAddress, Commitment commitment = Commitment.Finalized);`
+###### `SubscribePriceDataAccount(Action<Subscription, PriceDataAccount, ulong> action, string priceAccountAddress, Commitment commitment = Commitment.Finalized);`
   - Subscribe to a live feed of a `PriceDataAccount`, the given action is called on every notification received.
-#### `UnsubscribePriceDataAccountAsync(string priceAccountAddress);`
+###### `UnsubscribePriceDataAccountAsync(string priceAccountAddress);`
   - Unsubscribe to a live feed of a `PriceDataAccount`. This is an asynchronous operation.
-#### `UnsubscribePriceDataAccount(string priceAccountAddress);`
+###### `UnsubscribePriceDataAccount(string priceAccountAddress);`
   - Unsubscribe to a live feed of a `PriceDataAccount`.
 
 ## Examples

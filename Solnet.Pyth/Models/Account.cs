@@ -1,5 +1,3 @@
-// unset
-
 namespace Solnet.Pyth.Models
 {
     /// <summary>

@@ -9,6 +9,7 @@ using Solnet.Wallet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.WebSockets;
 using System.Threading.Tasks;
 
 namespace Solnet.Pyth
@@ -42,9 +43,35 @@ namespace Solnet.Pyth
             _priceDataAccountSubscriptions = new List<SubscriptionWrapper<PriceDataAccount>>();
         }
 
+        /// <inheritdoc cref="IPythClient.NodeAddress"/>
+        public Uri NodeAddress => RpcClient.NodeAddress;
+
+        /// <inheritdoc cref="IPythClient.ConnectionStatistics"/>
+        public IConnectionStatistics ConnectionStatistics => StreamingRpcClient.Statistics;
+
+        /// <inheritdoc cref="IPythClient.State"/>
+        public WebSocketState State => StreamingRpcClient.State;
+
         #region Streaming JSON RPC
 
-        /// <inheritdoc cref="SubscribePriceDataAccountAsync(Action{Subscription, PriceDataAccount, ulong}, string, Commitment)"/>
+        /// <inheritdoc cref="IPythClient.ConnectAsync"/>
+        public Task ConnectAsync()
+        {
+            if (State != WebSocketState.Open)
+                return StreamingRpcClient.ConnectAsync();
+            return null;
+        }
+
+        /// <inheritdoc cref="IPythClient.DisconnectAsync"/>
+        public Task DisconnectAsync()
+        {
+            if (State != WebSocketState.Open)
+                return null;
+            _priceDataAccountSubscriptions.Clear();
+            return StreamingRpcClient.DisconnectAsync();
+        }
+
+        /// <inheritdoc cref="IPythClient.SubscribePriceDataAccountAsync(Action{Subscription, PriceDataAccount, ulong}, string, Commitment)"/>
         public async Task<Subscription> SubscribePriceDataAccountAsync(
             Action<Subscription, PriceDataAccount, ulong> action, string priceAccountAddress,
             Commitment commitment = Commitment.Finalized)
@@ -68,12 +95,12 @@ namespace Solnet.Pyth
             return subOpenOrders;
         }
 
-        /// <inheritdoc cref="SubscribePriceDataAccount(Action{Subscription, PriceDataAccount, ulong}, string, Commitment)"/>
+        /// <inheritdoc cref="IPythClient.SubscribePriceDataAccount(Action{Subscription, PriceDataAccount, ulong}, string, Commitment)"/>
         public Subscription SubscribePriceDataAccount(Action<Subscription, PriceDataAccount, ulong> action,
             string priceAccountAddress, Commitment commitment = Commitment.Finalized) =>
             SubscribePriceDataAccountAsync(action, priceAccountAddress, commitment).Result;
 
-        /// <inheritdoc cref="UnsubscribePriceDataAccountAsync(string)"/>
+        /// <inheritdoc cref="IPythClient.UnsubscribePriceDataAccountAsync(string)"/>
         public Task UnsubscribePriceDataAccountAsync(string priceAccountAddress)
         {
             SubscriptionWrapper<PriceDataAccount> subscriptionWrapper = null;
@@ -92,57 +119,57 @@ namespace Solnet.Pyth
                 : StreamingRpcClient.UnsubscribeAsync(subscriptionWrapper.SubscriptionState);
         }
 
-        /// <inheritdoc cref="UnsubscribePriceDataAccount(string)"/>
+        /// <inheritdoc cref="IPythClient.UnsubscribePriceDataAccount(string)"/>
         public void UnsubscribePriceDataAccount(string priceAccountAddress) =>
-            UnsubscribePriceDataAccountAsync(priceAccountAddress).Wait();
+            UnsubscribePriceDataAccountAsync(priceAccountAddress);
 
         #endregion
 
         #region JSON RPC Requests
 
-        /// <inheritdoc cref="GetMappingAccountAsync(string, Commitment)"/>
+        /// <inheritdoc cref="IPythClient.GetMappingAccountAsync(string, Commitment)"/>
         public async Task<AccountResultWrapper<MappingAccount>> GetMappingAccountAsync(string account,
             Commitment commitment = Commitment.Finalized)
             => await GetAccount<MappingAccount>(account, commitment);
 
-        /// <inheritdoc cref="GetMappingAccount(string, Commitment)"/>
+        /// <inheritdoc cref="IPythClient.GetMappingAccount(string, Commitment)"/>
         public AccountResultWrapper<MappingAccount> GetMappingAccount(string account,
             Commitment commitment = Commitment.Finalized) => GetMappingAccountAsync(account, commitment).Result;
 
-        /// <inheritdoc cref="GetProductAccountAsync(string, Commitment)"/>
+        /// <inheritdoc cref="IPythClient.GetProductAccountAsync(string, Commitment)"/>
         public async Task<AccountResultWrapper<ProductAccount>> GetProductAccountAsync(string account,
             Commitment commitment = Commitment.Finalized)
             => await GetAccount<ProductAccount>(account, commitment);
 
-        /// <inheritdoc cref="GetProductAccount(string, Commitment)"/>
+        /// <inheritdoc cref="IPythClient.GetProductAccount(string, Commitment)"/>
         public AccountResultWrapper<ProductAccount> GetProductAccount(string account,
             Commitment commitment = Commitment.Finalized) => GetProductAccountAsync(account, commitment).Result;
 
-        /// <inheritdoc cref="GetProductAccountsAsync(MappingAccount, Commitment)"/>
+        /// <inheritdoc cref="IPythClient.GetProductAccountsAsync(MappingAccount, Commitment)"/>
         public async Task<MultipleAccountsResultWrapper<List<ProductAccount>>> GetProductAccountsAsync(
             MappingAccount account, Commitment commitment = Commitment.Finalized) =>
             await GetMultipleAccounts<ProductAccount>(account.ProductAccountKeys.Select(x => x.Key).ToList(),
                 commitment);
 
-        /// <inheritdoc cref="GetProductAccounts(MappingAccount, Commitment)"/>
+        /// <inheritdoc cref="IPythClient.GetProductAccounts(MappingAccount, Commitment)"/>
         public MultipleAccountsResultWrapper<List<ProductAccount>> GetProductAccounts(MappingAccount account,
             Commitment commitment = Commitment.Finalized) => GetProductAccountsAsync(account, commitment).Result;
 
-        /// <inheritdoc cref="GetPriceDataAccountAsync(string, Commitment)"/>
+        /// <inheritdoc cref="IPythClient.GetPriceDataAccountAsync(string, Commitment)"/>
         public async Task<AccountResultWrapper<PriceDataAccount>> GetPriceDataAccountAsync(string account,
             Commitment commitment = Commitment.Finalized) => await GetAccount<PriceDataAccount>(account, commitment);
 
-        /// <inheritdoc cref="GetPriceDataAccount(string, Commitment)"/>
+        /// <inheritdoc cref="IPythClient.GetPriceDataAccount(string, Commitment)"/>
         public AccountResultWrapper<PriceDataAccount> GetPriceDataAccount(string account,
             Commitment commitment = Commitment.Finalized) => GetPriceDataAccountAsync(account, commitment).Result;
 
-        /// <inheritdoc cref="GetPriceDataAccountsAsync(IEnumerable{ProductAccount}, Commitment)"/>
+        /// <inheritdoc cref="IPythClient.GetPriceDataAccountsAsync(IEnumerable{ProductAccount}, Commitment)"/>
         public async Task<MultipleAccountsResultWrapper<List<PriceDataAccount>>> GetPriceDataAccountsAsync(
             IEnumerable<ProductAccount> productAccounts, Commitment commitment = Commitment.Finalized) =>
             await GetMultipleAccounts<PriceDataAccount>(
                 productAccounts.Select(x => x.PriceAccount.Key).ToList(), commitment);
 
-        /// <inheritdoc cref="GetPriceDataAccounts(IEnumerable{ProductAccount}, Commitment)"/>
+        /// <inheritdoc cref="IPythClient.GetPriceDataAccounts(IEnumerable{ProductAccount}, Commitment)"/>
         public MultipleAccountsResultWrapper<List<PriceDataAccount>> GetPriceDataAccounts(
             IEnumerable<ProductAccount> productAccounts, Commitment commitment = Commitment.Finalized)
             => GetPriceDataAccountsAsync(productAccounts, commitment).Result;
