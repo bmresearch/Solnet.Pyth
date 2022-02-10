@@ -1,10 +1,12 @@
 using Solnet.Programs.Models;
 using Solnet.Pyth.Models;
+using Solnet.Rpc;
 using Solnet.Rpc.Core.Sockets;
 using Solnet.Rpc.Types;
 using Solnet.Wallet;
 using System;
 using System.Collections.Generic;
+using System.Net.WebSockets;
 using System.Threading.Tasks;
 
 namespace Solnet.Pyth
@@ -14,6 +16,43 @@ namespace Solnet.Pyth
     /// </summary>
     public interface IPythClient
     {
+        /// <summary>
+        /// The websocket connection state.
+        /// </summary>
+        WebSocketState State { get; }
+
+        /// <summary>
+        /// The <see cref="IRpcClient"/> instance.
+        /// </summary>
+        IRpcClient RpcClient { get; }
+
+        /// <summary>
+        /// The <see cref="IStreamingRpcClient"/> instance.
+        /// </summary>
+        IStreamingRpcClient StreamingRpcClient { get; }
+
+        /// <summary>
+        /// The statistics of the current websocket connection.
+        /// </summary>
+        IConnectionStatistics ConnectionStatistics { get; }
+
+        /// <summary>
+        /// The cluster the client is connected to.
+        /// </summary>
+        Uri NodeAddress { get; }
+
+        /// <summary>
+        /// Connect to the <see cref="StreamingRpcClient"/> for data streaming. This is an asynchronous operation.
+        /// </summary>
+        /// <returns>A task which may connect to the Rpc.</returns>
+        Task ConnectAsync();
+
+        /// <summary>
+        /// Disconnects from the <see cref="StreamingRpcClient"/> for data streaming. This is an asynchronous operation.
+        /// </summary>
+        /// <returns>A task which may connect to the Rpc.</returns>
+        Task DisconnectAsync();
+
         /// <summary>
         /// Gets the given <see cref="MappingAccount"/>. This is an asynchronous operation.
         /// </summary>

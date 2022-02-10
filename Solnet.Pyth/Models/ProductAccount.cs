@@ -64,16 +64,21 @@ namespace Solnet.Pyth.Models
 
                 ReadOnlySpan<byte> key = productAttributesBytes.Slice(idx, keyLength);
                 idx += keyLength;
+
                 int valueLength = productAttributesBytes[idx];
                 idx++;
+                if (valueLength == 0) continue;
+
                 ReadOnlySpan<byte> value = productAttributesBytes.Slice(idx, valueLength);
                 idx += valueLength;
+
                 string keyString = Encoding.UTF8.GetString(key);
                 string valueString = Encoding.UTF8.GetString(value);
                 productAttributes.Add(keyString, valueString);
             }
 
             bool hasType = productAttributes.TryGetValue("asset_type", out string assetType);
+            bool hasBase = productAttributes.TryGetValue("base", out string baseSymbol);
             bool hasSymbol = productAttributes.TryGetValue("symbol", out string symbol);
             bool hasTenor = productAttributes.TryGetValue("tenor", out string tenor);
             bool hasQuote = productAttributes.TryGetValue("quote_currency", out string quoteCurrency);
@@ -82,6 +87,7 @@ namespace Solnet.Pyth.Models
 
             Product product = new ()
             {
+                Base = hasBase ? baseSymbol : string.Empty,
                 AssetType = hasType ? assetType : string.Empty,
                 Symbol = hasSymbol ? symbol : string.Empty,
                 Tenor = hasTenor ? tenor : string.Empty,

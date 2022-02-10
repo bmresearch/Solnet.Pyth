@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 using Solnet.Programs.Models;
 using Solnet.Pyth.Models;
 using Solnet.Rpc;
@@ -9,16 +11,29 @@ namespace Solnet.Pyth.Examples
 {
     public class GetProductAccountsExample : IRunnableExample
     {
-        private static readonly IRpcClient RpcClient = Solnet.Rpc.ClientFactory.GetClient(Cluster.MainNet);
-
-        private static readonly IStreamingRpcClient StreamingRpcClient =
-            Solnet.Rpc.ClientFactory.GetStreamingClient(Cluster.MainNet);
-
+        private readonly IRpcClient _rpcClient;
+        private readonly IStreamingRpcClient _streamingRpcClient;
+        private readonly ILogger _logger;
         private readonly IPythClient _pythClient;
 
         public GetProductAccountsExample()
         {
-            _pythClient = ClientFactory.GetClient(RpcClient, StreamingRpcClient);
+            _logger = LoggerFactory.Create(x =>
+            {
+                x.AddSimpleConsole(o =>
+                {
+                    o.UseUtcTimestamp = true;
+                    o.IncludeScopes = true;
+                    o.ColorBehavior = LoggerColorBehavior.Enabled;
+                    o.TimestampFormat = "HH:mm:ss ";
+                })
+                .SetMinimumLevel(LogLevel.Debug);
+            }).CreateLogger<IRpcClient>();
+
+            // the clients
+            _rpcClient = Rpc.ClientFactory.GetClient(Cluster.MainNet, _logger);
+            _streamingRpcClient = Rpc.ClientFactory.GetStreamingClient(Cluster.MainNet, _logger);
+            _pythClient = ClientFactory.GetClient(_rpcClient, _streamingRpcClient);
         }
 
         public void Run()
@@ -41,14 +56,11 @@ namespace Solnet.Pyth.Examples
                 Console.WriteLine($"ProductAccount: {mappingAccount.ParsedResult.ProductAccountKeys[i]}");
                 Console.WriteLine($"\tPriceAccount: {productAccounts.ParsedResult[i].PriceAccount}");
 
-                /*
                 foreach ((string key, string value) in productAccounts.ParsedResult[i].ProductAttributes)
                 {
                     Console.WriteLine($"\tKey: {key} Value: {value}");
                 }
-                */
-
-                Task.Delay(250).Wait();
+                
             }
 
             Console.ReadKey();

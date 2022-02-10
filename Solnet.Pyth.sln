@@ -1,10 +1,31 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solnet.Pyth.Test", "Solnet.Pyth.Test\Solnet.Pyth.Test.csproj", "{DBD5FD6D-1EF7-4D8C-AC35-0B5CDA3468F3}"
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31624.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solnet.Pyth.Test", "Solnet.Pyth.Test\Solnet.Pyth.Test.csproj", "{DBD5FD6D-1EF7-4D8C-AC35-0B5CDA3468F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solnet.Pyth", "Solnet.Pyth\Solnet.Pyth.csproj", "{9B363F31-C88B-47FD-8A57-604CDA7A0F7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solnet.Pyth", "Solnet.Pyth\Solnet.Pyth.csproj", "{9B363F31-C88B-47FD-8A57-604CDA7A0F7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solnet.Pyth.Examples", "Solnet.Pyth.Examples\Solnet.Pyth.Examples.csproj", "{E4BBAF9D-FEBC-465F-B37E-81912C24117F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solnet.Pyth.Examples", "Solnet.Pyth.Examples\Solnet.Pyth.Examples.csproj", "{E4BBAF9D-FEBC-465F-B37E-81912C24117F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E44451BE-4744-4B5C-9F3E-B9CF8C04605A}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		build.cake = build.cake
+		build.ps1 = build.ps1
+		build.sh = build.sh
+		.github\workflows\build.yml = .github\workflows\build.yml
+		cake.config = cake.config
+		CODE_OF_CONDUCT.md = CODE_OF_CONDUCT.md
+		CONTRIBUTING.rst = CONTRIBUTING.rst
+		LICENSE = LICENSE
+		.github\workflows\publish.yml = .github\workflows\publish.yml
+		PULL_REQUEST_TEMPLATE.md = PULL_REQUEST_TEMPLATE.md
+		README.md = README.md
+		SharedBuildProperties.props = SharedBuildProperties.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +45,11 @@ Global
 		{E4BBAF9D-FEBC-465F-B37E-81912C24117F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4BBAF9D-FEBC-465F-B37E-81912C24117F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4BBAF9D-FEBC-465F-B37E-81912C24117F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {41D8EC7A-ED83-45B5-B679-B1D54187800F}
 	EndGlobalSection
 EndGlobal

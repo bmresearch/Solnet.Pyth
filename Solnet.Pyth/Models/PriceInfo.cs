@@ -87,8 +87,6 @@ namespace Solnet.Pyth.Models
         /// <returns>The <see cref="PriceInfo"/>.</returns>
         public static PriceInfo Deserialize(ReadOnlySpan<byte> data, double multiplier)
         {
-            if (data.Length != Layout.Length) throw new Exception("data length is invalid");
-
             long priceComponent = data.GetS64(Layout.PriceComponentOffset);
             ulong confidenceComponent = data.GetU64(Layout.ConfidenceComponentOffset);
 
