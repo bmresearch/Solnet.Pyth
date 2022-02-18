@@ -8,12 +8,6 @@
         <IsPackable>true</IsPackable>
     </PropertyGroup>
 
-	<Target Name="PrepareReleaseNotes" BeforeTargets="GenerateNuspec">
-		<PropertyGroup>
-			<PackageDescription>$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)/../RELEASE-NOTES.txt"))</PackageDescription>
-		</PropertyGroup>
-	</Target>
-
 	<ItemGroup>
 		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
 			<_Parameter1>Solnet.Pyth.Test</_Parameter1>
