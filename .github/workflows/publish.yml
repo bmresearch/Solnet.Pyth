@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main # Default release branch
+      - net5
 jobs:
   publish:
     name: build, pack & publish
@@ -11,6 +12,9 @@ jobs:
     steps:
       - name: Get the sources
         uses: actions/checkout@v2
+      - name: Extract release notes
+        run: |
+            git log --pretty=format:'%d %s' ${GITHUB_REF} | perl -pe 's| \(.*tag: v(\d+.\d+.\d+(-preview\d{3})?)(, .*?)*\)|\n## \1\n|g' > RELEASE-NOTES.txt
       - name: Run the build script
         uses: cake-build/cake-action@v1
         with:
@@ -28,18 +32,13 @@ jobs:
           TAG_FORMAT: v*
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           INCLUDE_SYMBOLS: true
-      - name: Build Changelog
-        id: build_changelog
-        uses: mikepenz/release-changelog-builder-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       - name: Create GitHub Release
         id: create_release
         uses: actions/create-release@v1
         with:
           tag_name: ${{ steps.publish_nuget.outputs.VERSION }}
           release_name: ${{ steps.publish_nuget.outputs.VERSION }}
-          body: ${{ steps.build_changelog.outputs.changelog }}
+          body_path: RELEASE-NOTES.txt
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       - name: Upload release assets

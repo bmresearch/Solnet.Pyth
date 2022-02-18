@@ -104,7 +104,7 @@ Task("Pack")
         };
 
 
-        GetFiles("./Solnet.Pyth/")
+        GetFiles("./*/*.csproj")
             .ToList()
             .ForEach(f => DotNetCorePack(f.FullPath, settings));
     });
