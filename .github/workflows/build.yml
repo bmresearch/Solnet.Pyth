@@ -12,14 +12,11 @@ jobs:
     steps:
       - name: Get the sources
         uses: actions/checkout@v1
-      - name: Extract release notes
-        run: |
-            git log --pretty=format:'%d %s' ${GITHUB_REF} | perl -pe 's| \(.*tag: v(\d+.\d+.\d+(-preview\d{3})?)(, .*?)*\)|\n## \1\n|g' > RELEASE-NOTES.txt
       - name: Run the build script
         uses: cake-build/cake-action@v1
         with:
           script-path: build.cake
-          target: Pack
+          target: Report
           cake-bootstrap: true
       - name: Publish coverage report to coveralls.io
         uses: coverallsapp/github-action@v1.1.2
