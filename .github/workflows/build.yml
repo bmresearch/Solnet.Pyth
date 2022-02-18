@@ -2,9 +2,9 @@ name: Build
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, net5 ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, net5 ]
 
 jobs:
   build:
@@ -12,6 +12,9 @@ jobs:
     steps:
       - name: Get the sources
         uses: actions/checkout@v1
+      - name: Extract release notes
+        run: |
+            git log --pretty=format:'%d %s' ${GITHUB_REF} | perl -pe 's| \(.*tag: v(\d+.\d+.\d+(-preview\d{3})?)(, .*?)*\)|\n## \1\n|g' > RELEASE-NOTES.txt
       - name: Run the build script
         uses: cake-build/cake-action@v1
         with:
