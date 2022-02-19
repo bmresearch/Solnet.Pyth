@@ -3,9 +3,14 @@
 </p>
 <p align="center">
     <a href="https://github.com/bmresearch/Solnet.Pyth/actions/workflows/build.yml">
-       <img alt="Build" src="https://github.com/bmresearch/Solnet.Pyth/actions/workflows/build.yml/badge.svg"></a>
+      <img alt="Build .NET6" src="https://github.com/bmresearch/Solnet.Pyth/actions/workflows/build.yml/badge.svg"></a>
     <a href="https://github.com/bmresearch/Solnet.Pyth/actions/workflows/publish.yml">
-       <img alt="Release" src="https://github.com/bmresearch/Solnet.Pyth/actions/workflows/publish.yml/badge.svg"></a>
+      <img alt="Release .NET6" src="https://github.com/bmresearch/Solnet.Pyth/actions/workflows/publish.yml/badge.svg"></a>
+<br/>
+    <a href="https://github.com/bmresearch/Solnet.Pyth/actions/workflows/build.yml">
+       <img alt="Build .NET5" src="https://github.com/bmresearch/Solnet.Pyth/actions/workflows/build.yml/badge.svg?branch=net5"></a>
+    <a href="https://github.com/bmresearch/Solnet.Pyth/actions/workflows/publish.yml">
+       <img alt="Release .NET5" src="https://github.com/bmresearch/Solnet.Pyth/actions/workflows/publish.yml/badge.svg?branch=net5"></a>
     <a href="https://coveralls.io/github/bmresearch/Solnet.Pyth?branch=main">
         <img src="https://coveralls.io/repos/github/bmresearch/Solnet.Pyth/badge.svg?branch=main" 
             alt="Coverage Status" ></a>

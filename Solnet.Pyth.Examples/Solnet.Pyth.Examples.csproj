@@ -6,9 +6,9 @@
     </PropertyGroup>
     
     <ItemGroup>
-        <PackageReference Include="Solnet.Rpc" Version="0.6.1" />
-        <PackageReference Include="Solnet.Wallet" Version="0.6.1" />
-        <PackageReference Include="Solnet.Programs" Version="0.6.1" />
+        <PackageReference Include="Solnet.Rpc" Version="5.0.0" />
+        <PackageReference Include="Solnet.Wallet" Version="5.0.0" />
+        <PackageReference Include="Solnet.Programs" Version="5.0.0" />
     </ItemGroup>
     
     <ItemGroup>
