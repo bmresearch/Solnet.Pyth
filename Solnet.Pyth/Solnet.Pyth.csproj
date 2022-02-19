@@ -4,7 +4,7 @@
         <Description>
             Solnet.Pyth implements functionality to integrate Pyth Network into .Net applications.
         </Description>
-        <TargetFramework>net5.0</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
         <IsPackable>true</IsPackable>
     </PropertyGroup>
 
@@ -15,9 +15,9 @@
 	</ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Solnet.Rpc" Version="0.6.1" />
-      <PackageReference Include="Solnet.Wallet" Version="0.6.1" />
-      <PackageReference Include="Solnet.Programs" Version="0.6.1" />
+      <PackageReference Include="Solnet.Rpc" Version="6.0.0" />
+      <PackageReference Include="Solnet.Wallet" Version="6.0.0" />
+      <PackageReference Include="Solnet.Programs" Version="6.0.0" />
     </ItemGroup>
 
     <Import Project="..\SharedBuildProperties.props" />
