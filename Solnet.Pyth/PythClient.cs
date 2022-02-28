@@ -37,7 +37,7 @@ namespace Solnet.Pyth
         /// <param name="streamingRpcClient">The streaming RPC client.</param>
         /// <returns>The Serum Client.</returns>
         internal PythClient(ILogger logger = null, IRpcClient rpcClient = default,
-            IStreamingRpcClient streamingRpcClient = default) : base(rpcClient, streamingRpcClient)
+            IStreamingRpcClient streamingRpcClient = default) : base(rpcClient, streamingRpcClient, null)
         {
             _logger = logger;
             _priceDataAccountSubscriptions = new List<SubscriptionWrapper<PriceDataAccount>>();
