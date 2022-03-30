@@ -44,9 +44,9 @@ separate repository so it is contained, as the goal for [Solnet](https://github.
 - net 5.0
 
 ## Dependencies
-- Solnet.Wallet v5.0.1
-- Solnet.Rpc v5.0.1
-- Solnet.Programs v5.0.1
+- Solnet.Wallet v5.0.4
+- Solnet.Rpc v5.0.4
+- Solnet.Programs v5.0.4
 
 ## API
 
