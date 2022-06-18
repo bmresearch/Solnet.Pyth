@@ -18,8 +18,8 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
-		<PackageReference Include="Solnet.Programs" Version="6.0.8" />
-		<PackageReference Include="Solnet.Rpc" Version="6.0.8" />
+		<PackageReference Include="Solnet.Programs" Version="6.0.12" />
+		<PackageReference Include="Solnet.Rpc" Version="6.0.12" />
     </ItemGroup>
 
 	<ItemGroup>
